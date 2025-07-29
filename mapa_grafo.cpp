@@ -1,5 +1,9 @@
-﻿#include <SFML/Graphics.hpp>
-#include "grafo_arequipa.h"
+#include <SFML/Graphics.hpp>
+#include <cmath>
+#include "grafo_arequipa.h" 
+#include "estructuras.h"
+#include "bfs.h"
+
 
 const int ANCHO = 1200;
 const int ALTO = 800;
@@ -7,6 +11,9 @@ const int ALTO = 800;
 int nodoOrigen = -1;
 int nodoDestino = -1;
 const float radioSeleccion = 5.0f;
+
+int camino[NODE_COUNT];
+int largoCamino = 0;
 
 int main() {
     sf::RenderWindow ventana(sf::VideoMode(ANCHO, ALTO), "Mapa de Arequipa - Grafo");
@@ -27,7 +34,6 @@ int main() {
             if (evento.type == sf::Event::Closed)
                 ventana.close();
 
-            // Zoom con rueda del mouse
             if (evento.type == sf::Event::MouseWheelScrolled) {
                 if (evento.mouseWheelScroll.delta > 0)
                     zoomFactor /= ZOOM_STEP;
@@ -41,7 +47,6 @@ int main() {
             if (evento.type == sf::Event::MouseButtonPressed && evento.mouseButton.button == sf::Mouse::Left) {
                 sf::Vector2f click = ventana.mapPixelToCoords(sf::Mouse::getPosition(ventana));
 
-                // Detectar si se hizo clic en un nodo
                 float minDist = 1e9;
                 int nodoMasCercano = -1;
 
@@ -62,29 +67,38 @@ int main() {
                     else if (nodoDestino == -1 && nodoMasCercano != nodoOrigen)
                         nodoDestino = nodoMasCercano;
                     else {
-                        // Reiniciar si ya hay dos
                         nodoOrigen = nodoMasCercano;
                         nodoDestino = -1;
                     }
                 }
-                else {
-                    // Si no se hizo clic en un nodo, iniciar arrastre
-                    arrastrando = true;
-                    mouseAnterior = sf::Mouse::getPosition(ventana);
-                }
             }
 
-            if (evento.type == sf::Event::MouseButtonReleased && evento.mouseButton.button == sf::Mouse::Left) {
+            if (evento.type == sf::Event::MouseButtonPressed && evento.mouseButton.button == sf::Mouse::Right) {
+                arrastrando = true;
+                mouseAnterior = sf::Mouse::getPosition(ventana);
+            }
+
+            if (evento.type == sf::Event::MouseButtonReleased && evento.mouseButton.button == sf::Mouse::Right) {
                 arrastrando = false;
             }
 
-            // Mover vista
             if (evento.type == sf::Event::MouseMoved && arrastrando) {
                 sf::Vector2i mouseActual = sf::Mouse::getPosition(ventana);
-                sf::Vector2f delta = ventana.mapPixelToCoords(mouseAnterior) - ventana.mapPixelToCoords(mouseActual);
-                vista.move(delta);
+                sf::Vector2f desplazamiento = ventana.mapPixelToCoords(mouseAnterior) - ventana.mapPixelToCoords(mouseActual);
+                vista.move(desplazamiento);
                 ventana.setView(vista);
                 mouseAnterior = mouseActual;
+            }
+            if (evento.type == sf::Event::KeyPressed) {
+                if (evento.key.code == sf::Keyboard::B && nodoOrigen != -1 && nodoDestino != -1) {
+                    buscar_BFS(nodoOrigen, nodoDestino, camino, largoCamino);
+                }
+
+                if (evento.key.code == sf::Keyboard::R) {
+                    nodoOrigen = -1;
+                    nodoDestino = -1;
+                    largoCamino = 0;
+                }
             }
         }
 
@@ -94,16 +108,26 @@ int main() {
             for (int j = OFFSET[i]; j < OFFSET[i + 1]; ++j) {
                 int destino = NEIGHBOR[j];
                 sf::Vertex linea[] = {
-                    sf::Vertex(sf::Vector2f(static_cast<float>(POS_X[i]), static_cast<float>(POS_Y[i])), sf::Color(200, 200, 200)),
-                    sf::Vertex(sf::Vector2f(static_cast<float>(POS_X[destino]), static_cast<float>(POS_Y[destino])), sf::Color(200, 200, 200))
+                    sf::Vertex(sf::Vector2f(static_cast<float>(POS_X[i]), static_cast<float>(POS_Y[i])), sf::Color(150, 150, 150)),
+                    sf::Vertex(sf::Vector2f(static_cast<float>(POS_X[destino]), static_cast<float>(POS_Y[destino])), sf::Color(150, 150, 150))
                 };
                 ventana.draw(linea, 2, sf::Lines);
             }
         }
+        if (largoCamino > 1) {
+            for (int i = 0; i < largoCamino - 1; ++i) {
+                int u = camino[i];
+                int v = camino[i + 1];
 
-
+                sf::Vertex linea[] = {
+                    sf::Vertex(sf::Vector2f(POS_X[u], POS_Y[u]), sf::Color::Blue),
+                    sf::Vertex(sf::Vector2f(POS_X[v], POS_Y[v]), sf::Color::Blue)
+                };
+                ventana.draw(linea, 2, sf::Lines);
+            }
+        }
+        
         float radioNodo = 0.5f;
-
         for (int i = 0; i < NODE_COUNT; ++i) {
             sf::CircleShape nodo(radioNodo);
             nodo.setPosition(static_cast<float>(POS_X[i]) - radioNodo, static_cast<float>(POS_Y[i]) - radioNodo);
