@@ -1,8 +1,12 @@
-#include <SFML/Graphics.hpp>
+﻿#include <SFML/Graphics.hpp>
 #include "grafo_arequipa.h"
 
 const int ANCHO = 1200;
 const int ALTO = 800;
+
+int nodoOrigen = -1;
+int nodoDestino = -1;
+const float radioSeleccion = 5.0f;
 
 int main() {
     sf::RenderWindow ventana(sf::VideoMode(ANCHO, ALTO), "Mapa de Arequipa - Grafo");
@@ -35,8 +39,39 @@ int main() {
             }
 
             if (evento.type == sf::Event::MouseButtonPressed && evento.mouseButton.button == sf::Mouse::Left) {
-                arrastrando = true;
-                mouseAnterior = sf::Mouse::getPosition(ventana);
+                sf::Vector2f click = ventana.mapPixelToCoords(sf::Mouse::getPosition(ventana));
+
+                // Detectar si se hizo clic en un nodo
+                float minDist = 1e9;
+                int nodoMasCercano = -1;
+
+                for (int i = 0; i < NODE_COUNT; ++i) {
+                    float dx = static_cast<float>(POS_X[i]) - click.x;
+                    float dy = static_cast<float>(POS_Y[i]) - click.y;
+                    float dist = std::sqrt(dx * dx + dy * dy);
+
+                    if (dist < radioSeleccion && dist < minDist) {
+                        minDist = dist;
+                        nodoMasCercano = i;
+                    }
+                }
+
+                if (nodoMasCercano != -1) {
+                    if (nodoOrigen == -1)
+                        nodoOrigen = nodoMasCercano;
+                    else if (nodoDestino == -1 && nodoMasCercano != nodoOrigen)
+                        nodoDestino = nodoMasCercano;
+                    else {
+                        // Reiniciar si ya hay dos
+                        nodoOrigen = nodoMasCercano;
+                        nodoDestino = -1;
+                    }
+                }
+                else {
+                    // Si no se hizo clic en un nodo, iniciar arrastre
+                    arrastrando = true;
+                    mouseAnterior = sf::Mouse::getPosition(ventana);
+                }
             }
 
             if (evento.type == sf::Event::MouseButtonReleased && evento.mouseButton.button == sf::Mouse::Left) {
@@ -67,12 +102,19 @@ int main() {
         }
 
 
-        float radioNodo = 0.5f;  
+        float radioNodo = 0.5f;
 
         for (int i = 0; i < NODE_COUNT; ++i) {
             sf::CircleShape nodo(radioNodo);
             nodo.setPosition(static_cast<float>(POS_X[i]) - radioNodo, static_cast<float>(POS_Y[i]) - radioNodo);
-            nodo.setFillColor(sf::Color::Red);
+
+            if (i == nodoOrigen)
+                nodo.setFillColor(sf::Color::Blue);
+            else if (i == nodoDestino)
+                nodo.setFillColor(sf::Color::Green);
+            else
+                nodo.setFillColor(sf::Color::Red);
+
             ventana.draw(nodo);
         }
 
