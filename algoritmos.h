@@ -9,3 +9,6 @@ void buscar_BFS(int origen, int destino, int camino[], int& largo);
 
 /*algoritmo DFS*/ 
 void buscar_DFS(int origen, int destino, int camino[], int& largo);
+
+/*algoritmo Best first search*/ 
+void buscar_BestFirst(int origen, int destino, int camino[], int& largo);
