@@ -1,9 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
-#include "grafo_arequipa.h" 
+#include "algoritmos.h"
 #include "estructuras.h"
-#include "bfs.h"
-
 
 const int ANCHO = 1200;
 const int ALTO = 800;
@@ -126,7 +124,7 @@ int main() {
                 ventana.draw(linea, 2, sf::Lines);
             }
         }
-        
+
         float radioNodo = 0.5f;
         for (int i = 0; i < NODE_COUNT; ++i) {
             sf::CircleShape nodo(radioNodo);
