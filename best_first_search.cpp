@@ -1,11 +1,5 @@
 #include "algoritmos.h"
 
-float heuristica(int nodo, int destino) {
-    float dx = POS_X[nodo] - POS_X[destino];
-    float dy = POS_Y[nodo] - POS_Y[destino];
-    return std::sqrt(dx * dx + dy * dy);
-}
-
 void buscar_BestFirst(int origen, int destino, int camino[], int& largo) {
     bool visitado[NODE_COUNT] = { false };
     int anterior[NODE_COUNT];
