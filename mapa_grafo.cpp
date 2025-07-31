@@ -91,7 +91,9 @@ int main() {
                 if (evento.key.code == sf::Keyboard::B && nodoOrigen != -1 && nodoDestino != -1) {
                     buscar_BFS(nodoOrigen, nodoDestino, camino, largoCamino);
                 }
-
+                if (evento.key.code == sf::Keyboard::D && nodoOrigen != -1 && nodoDestino != -1) {
+                    buscar_DFS(nodoOrigen, nodoDestino, camino, largoCamino);
+                }
                 if (evento.key.code == sf::Keyboard::R) {
                     nodoOrigen = -1;
                     nodoDestino = -1;
