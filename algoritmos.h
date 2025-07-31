@@ -1,6 +1,7 @@
 #pragma once
 #include "grafo_arequipa.h"
 #include "estructuras.h"
+#include <cmath>
 /*Plantilla de los algoritmos */
 
 
