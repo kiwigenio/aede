@@ -1,12 +1,8 @@
-﻿#pragma once
-
-#include "grafo_arequipa.h"    
-#include "estructuras.h"
+#include "algoritmos.h"
 
 void buscar_BFS(int origen, int destino, int camino[], int& largo) {
-   
-    bool visitado[NODE_COUNT] = { false };
-    int anterior[NODE_COUNT]; 
+    bool* visitado = new bool[NODE_COUNT]();
+    int* anterior = new int[NODE_COUNT];
 
     for (int i = 0; i < NODE_COUNT; ++i)
         anterior[i] = -1;
@@ -32,7 +28,6 @@ void buscar_BFS(int origen, int destino, int camino[], int& largo) {
         }
     }
 
- 
     largo = 0;
     int actual = destino;
     while (actual != -1) {
@@ -45,6 +40,6 @@ void buscar_BFS(int origen, int destino, int camino[], int& largo) {
         camino[i] = camino[largo - 1 - i];
         camino[largo - 1 - i] = tmp;
     }
-
- 
+    delete[] visitado;
+    delete[] anterior;
 }
