@@ -134,11 +134,11 @@ g++ -std=c++17 -O2 parte2_main.cpp grafo_grande.cpp algoritmos_grandes.cpp dijks
 - **Algoritmos optimizados**: Estructuras de datos sin STL, optimizadas para memoria
 
 ### Pruebas de la ejecucion de la segunda parte 
-![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-1.png)
-![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-2.png)
-![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-3.png)
-![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-4.png)
-![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-5.png)
+![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-1.jpeg)
+![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-2.jpeg)
+![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-3.jpeg)
+![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-4.jpeg)
+![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-5.jpeg)
 
 
 ### Métricas Medidas
