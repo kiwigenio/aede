@@ -100,6 +100,10 @@ El proyecto está optimizado para manejar grafos de gran escala:
 - Estructuras de datos eficientes implementadas desde cero
 - Algoritmos optimizados para rendimiento
 
+## Pruebas de ejecucion 
+![Captura de la primera prueba](imagenes_prueba/prueba_parte1-1.png)
+![Captura de la segunda prueba](imagenes_prueba/prueba_parte1-2.png)
+
 ## Parte II: Grafos Grandes (2M nodos)
 
 Para la segunda parte del proyecto (grafos de 2 millones de nodos), se pueden usar las mismas implementaciones de algoritmos, enfocándose en:
