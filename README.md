@@ -135,7 +135,6 @@ g++ -std=c++17 -O2 parte2_main.cpp grafo_grande.cpp algoritmos_grandes.cpp dijks
 
 ### Pruebas de la ejecucion de la segunda parte 
 ![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-1.jpeg)
-![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-2.jpeg)
 ![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-3.jpeg)
 ![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-4.jpeg)
 ![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-5.jpeg)
