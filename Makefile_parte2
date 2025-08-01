@@ -1,0 +1,67 @@
+# Makefile para Parte II - Grafos Grandes
+CXX = g++
+CXXFLAGS = -std=c++17 -O3 -march=native -flto -DNDEBUG -fopenmp -Wall
+TARGET_P2 = parte2_benchmark
+
+SOURCES_P2 = parte2_main.cpp grafo_grande.cpp algoritmos_grandes.cpp dijkstra_grande.cpp metricas.cpp
+OBJECTS_P2 = $(SOURCES_P2:.cpp=.o)
+
+# Regla principal para Parte II
+parte2: $(TARGET_P2)
+
+$(TARGET_P2): $(OBJECTS_P2)
+	$(CXX) $(CXXFLAGS) $(OBJECTS_P2) -o $(TARGET_P2)
+
+# Reglas para archivos .o
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Ejecutar Parte II
+run-parte2: $(TARGET_P2)
+	./$(TARGET_P2)
+
+# Ejecutar con configuración personalizada
+run-custom: $(TARGET_P2)
+	@echo "Ejecutando con configuración personalizada..."
+	@echo "Threads: $(shell nproc)"
+	@echo "Memoria disponible: $(shell free -h | grep '^Mem:' | awk '{print $$7}')"
+	./$(TARGET_P2)
+
+# Limpiar solo Parte II
+clean-parte2:
+	rm -f $(OBJECTS_P2) $(TARGET_P2)
+
+# Limpiar todo
+clean-all:
+	rm -f *.o mapa_arequipa $(TARGET_P2)
+
+# Benchmark completo
+benchmark: $(TARGET_P2)
+	@echo "=== EJECUTANDO BENCHMARK COMPLETO ==="
+	@echo "Esto puede tardar 10-20 minutos..."
+	./$(TARGET_P2) > benchmark_results.txt
+	@echo "Resultados guardados en: benchmark_results.txt"
+
+# Información del sistema
+info:
+	@echo "=== INFORMACIÓN DEL SISTEMA ==="
+	@echo "Compilador: $(shell $(CXX) --version | head -1)"
+	@echo "CPU Cores: $(shell nproc)"
+	@echo "Arquitectura: $(shell uname -m)"
+	@echo "Sistema: $(shell uname -s)"
+	@echo "Memoria RAM: $(shell free -h | grep '^Mem:' | awk '{print $$2}')"
+	@echo "Espacio disponible: $(shell df -h . | tail -1 | awk '{print $$4}')"
+
+# Ayuda
+help-parte2:
+	@echo "=== COMANDOS DISPONIBLES PARTE II ==="
+	@echo "make parte2        - Compilar Parte II"
+	@echo "make run-parte2    - Ejecutar Parte II"
+	@echo "make benchmark     - Ejecutar benchmark completo"
+	@echo "make clean-parte2  - Limpiar archivos Parte II"
+	@echo "make info          - Mostrar información del sistema"
+	@echo ""
+	@echo "ADVERTENCIA: Parte II requiere 2-4 GB de RAM"
+	@echo "Tiempo estimado: 5-15 minutos dependiendo del hardware"
+
+.PHONY: parte2 run-parte2 run-custom clean-parte2 clean-all benchmark info help-parte2

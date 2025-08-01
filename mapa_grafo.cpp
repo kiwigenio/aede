@@ -93,7 +93,22 @@ int main() {
                 if (evento.key.code == sf::Keyboard::B && nodoOrigen != -1 && nodoDestino != -1) {
                     buscar_BFS(nodoOrigen, nodoDestino, camino, largoCamino);
                 }
+<<<<<<< Updated upstream
 
+=======
+                if (evento.key.code == sf::Keyboard::D && nodoOrigen != -1 && nodoDestino != -1) {
+                    buscar_DFS(nodoOrigen, nodoDestino, camino, largoCamino);
+                }
+                if (evento.key.code == sf::Keyboard::G && nodoOrigen != -1 && nodoDestino != -1) {
+                    buscar_BestFirst(nodoOrigen, nodoDestino, camino, largoCamino);
+                }
+                if (evento.key.code == sf::Keyboard::J && nodoOrigen != -1 && nodoDestino != -1) {
+                    buscar_Dijkstra(nodoOrigen, nodoDestino, camino, largoCamino);
+                }
+                if (evento.key.code == sf::Keyboard::A && nodoOrigen != -1 && nodoDestino != -1) {
+                    buscar_AStar(nodoOrigen, nodoDestino, camino, largoCamino);
+                }
+>>>>>>> Stashed changes
                 if (evento.key.code == sf::Keyboard::R) {
                     nodoOrigen = -1;
                     nodoDestino = -1;
