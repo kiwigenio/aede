@@ -100,6 +100,9 @@ int main() {
                 if (evento.key.code == sf::Keyboard::G && nodoOrigen != -1 && nodoDestino != -1) {
                     buscar_AStar(nodoOrigen, nodoDestino, camino, largoCamino);
                 }
+                if (evento.key.code == sf::Keyboard::K && nodoOrigen != -1 && nodoDestino != -1) {
+                    buscar_DIJKSTRA(nodoOrigen, nodoDestino, camino, largoCamino);
+                }
                 if (evento.key.code == sf::Keyboard::R) {
                     nodoOrigen = -1;
                     nodoDestino = -1;
