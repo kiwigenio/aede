@@ -1,7 +1,7 @@
-
+// estructuras.hpp
 #pragma once
 
-const int TAM_MAX = 10000;
+const int TAM_MAX = 10000; // puedes ajustarlo seg�n el tama�o de tu grafo
 
 class ColaInt {
 private:
@@ -35,6 +35,6 @@ public:
             frente = (frente + 1) % TAM_MAX;
             return val;
         }
-        return -1; 
+        return -1; // error
     }
 };
