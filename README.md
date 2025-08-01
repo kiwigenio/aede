@@ -2,6 +2,9 @@
 
 Sistema de navegación basado en grafos implementado en C++ que permite visualizar rutas sobre un mapa de Arequipa y calcular rutas óptimas entre dos puntos.
 
+## Participantes del proyecto 
+- Kerin Sebastian Larico Huillca - 20220728
+
 ## Características
 
 - **Implementación desde cero**: Grafos y algoritmos implementados sin usar STL
