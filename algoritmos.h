@@ -18,6 +18,8 @@ void buscar_BestFirst(int origen, int destino, int camino[], int& largo);
 /*algoritmo A* */ 
 void buscar_AStar(int origen, int destino, int camino[], int& largo);
 
+/*algoritmo Dijkstra*/ 
+void buscar_DIJKSTRA(int origen, int destino, int camino[], int& largo);
 
 float heuristica(int nodo, int destino);
 
