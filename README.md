@@ -133,6 +133,14 @@ g++ -std=c++17 -O2 parte2_main.cpp grafo_grande.cpp algoritmos_grandes.cpp dijks
 - **Exportación**: Resultados en CSV y reportes HTML
 - **Algoritmos optimizados**: Estructuras de datos sin STL, optimizadas para memoria
 
+### Pruebas de la ejecucion de la segunda parte 
+![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-1.png)
+![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-2.png)
+![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-3.png)
+![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-4.png)
+![Captura de la segunda parte ](imagenes_prueba/prueba_parte2-5.png)
+
+
 ### Métricas Medidas
 - Tiempo de construcción del grafo
 - Tiempo de búsqueda por algoritmo
