@@ -4,6 +4,7 @@ Sistema de navegación basado en grafos implementado en C++ que permite visualiz
 
 ## Participantes del proyecto 
 - Kerin Sebastian Larico Huillca - 20220728
+- Angela Shirleth Soto Huerta
 
 ## Características
 
